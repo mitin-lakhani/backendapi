@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
-console.log("Port is",router)
 export default router;
 
 
