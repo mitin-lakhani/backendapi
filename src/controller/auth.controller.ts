@@ -12,8 +12,8 @@ const generateOTP = () =>
 export const register = async (req:Request,res:Response) => {
   const { name, email, password } = req.body;
 
-  console.log("name is",name);
-  console.log("email is",email);
+ console.log("Register Req Body value",req.body);
+ 
 
   const exstingUser = await User.findOne({email});
   
