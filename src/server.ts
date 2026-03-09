@@ -5,7 +5,7 @@ import authRoutes from "./routes/auth.routes"
 import userRoutes from "./routes/user.routes"
 import healthRoutes from "./routes/health.routes"
 import cors from "cors"
-import { tr } from "zod/locales";
+
 
 dotenv.config();
 connectDb();
