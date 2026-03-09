@@ -12,6 +12,7 @@ const generateOTP = () =>
 export const register = async (req:Request,res:Response) => {
   const { name, email, password } = req.body;
 
+
   const exstingUser = await User.findOne({email});
 
   if(exstingUser){
@@ -222,4 +223,6 @@ export const updateProfile = async (req:Request,res:Response) =>{
       res.status(500).json({ message: "Server error"});
     }
 };
+
+
   
