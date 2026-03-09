@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.routes"
 import userRoutes from "./routes/user.routes"
 import healthRoutes from "./routes/health.routes"
 import cors from "cors"
+import { tr } from "zod/locales";
 
 dotenv.config();
 connectDb();
@@ -12,10 +13,22 @@ connectDb();
 const PORT =Number( process.env.PORT || 5000);
 
 const app = express();
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://transcendent-frangollo-4b6ddc.netlify.app'
+];
+
 app.use(
   cors({
-    origin:["http://localhost:5173","https://transcendent-frangollo-4b6ddc.netlify.app"],
-    // methods:['POST','GET','PUT','DELETE'],
+    origin:function (origin,callback){
+      if(!origin || allowedOrigins.includes(origin)){
+        callback(null,true);
+      }else{
+        callback(new Error("Not Allowed by CORS"));
+      }
+    },
+    methods:['POST','GET','PUT','DELETE'],
     credentials:true,
   })
 );
@@ -29,5 +42,3 @@ app.use("/api/users",userRoutes);
 app.listen(process.env.PORT,()=>{
     console.log(`port is runnig${process.env.PORT}`);
 });
-
-
