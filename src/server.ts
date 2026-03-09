@@ -21,13 +21,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin:function (origin,callback){
-      if(!origin || allowedOrigins.includes(origin)){
-        callback(null,true);
-      }else{
-        callback(new Error("Not Allowed by CORS"));
-      }
-    },
+    origin:allowedOrigins,
     methods:['POST','GET','PUT','DELETE'],
     credentials:true,
   })
@@ -39,6 +33,6 @@ app.use("/api/auth",authRoutes);
 app.use("/api/users",userRoutes);
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(`port is runnig${process.env.PORT}`);
+app.listen(PORT,()=>{
+    console.log(`port is runnig${PORT}`);
 });
