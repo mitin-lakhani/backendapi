@@ -5,8 +5,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 
 export const sendEmail = async (to:string,subject:string,text:string) =>{
-
-    try{
         const msg = {
             to,
             from:process.env.USER_EMAIL as string,
@@ -16,13 +14,6 @@ export const sendEmail = async (to:string,subject:string,text:string) =>{
         
         await sgMail.send(msg);
         console.log("Mail Sent SuccessFully");
-    }catch(error){
-        console.error("SendGrid Error",error);
-        throw error;
-    }
-
-
-
 
     // const transporter = nodemailer.createTransport({
     //    service:"gmail",
