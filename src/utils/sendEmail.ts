@@ -1,7 +1,7 @@
 // import nodemailer from "nodemailer"
 import sgMail from "@sendgrid/mail";
 
-sgMail.setApiKey(process.env.SEND_GRID_API as string);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 
 export const sendEmail = async (to:string,subject:string,text:string) =>{
@@ -12,7 +12,7 @@ export const sendEmail = async (to:string,subject:string,text:string) =>{
             from:process.env.USER_EMAIL as string,
             subject,
             text,
-        };
+        };  
         
         await sgMail.send(msg);
         console.log("Mail Sent SuccessFully");
