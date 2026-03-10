@@ -13,11 +13,11 @@ console.log(process.env.USER_EMAIL);
 export const sendEmail = async (to:string,subject:string,text:string) =>{
     try{
           const msg = {
-            to:"mitinlakhani2004@gmail.com",
+            to:to,
             from:process.env.USER_EMAIL as string,
-            subject,
-            text,
-        };  
+            subject:subject,
+            text:text,
+        }; 
         await sgMail.send(msg);
         console.log("Mail Sent SuccessFully");
     }catch(error:any){
