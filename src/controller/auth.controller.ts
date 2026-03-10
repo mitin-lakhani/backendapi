@@ -62,6 +62,43 @@ export const verifyOTP = async (req: Request, res: Response) => {
   await user.save();
   res.json({ message: "Account verified" });
 };
+// resend otp 
+export const resendOtp = async (req:Request,res:Response) =>{
+  try{
+      const {email} = req.body;
+
+      //check user exist
+
+      const user = await User.findOne({email});
+      if(!user){
+          return res.status(404).json({
+            message:"User Not Found",
+          });
+      }
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      user.otp =otp;
+      user.otpExpires = new Date(Date.now() + 5 * 60 * 1000)
+      await user.save();
+
+      // send email
+      await sendEmail(email,"Otp Varification",`Your otp is ${otp}`);
+
+      // otp resend
+
+      res.status(200).json({
+        message:"OTP Resend SuccessFully"
+      });
+
+  }catch(error){
+    console.log(error);
+    res.status(500).json({
+      message:"Internal Server Error"
+    })
+  }
+
+
+}
+// 
 
 // login api
 

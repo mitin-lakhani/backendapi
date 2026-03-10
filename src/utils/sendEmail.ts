@@ -15,13 +15,13 @@ export const sendEmail = async (to:string,subject:string,text:string) =>{
           const msg = {
             to:to,
             from:process.env.USER_EMAIL as string,
-            subject:subject,
-            text:text,
+            subject:"otp varification",
+            text
         }; 
         await sgMail.send(msg);
         console.log("Mail Sent SuccessFully");
     }catch(error:any){
-        console.log("send grid error",error.response?.body || error);
+        console.log("send error",error.response?.body || error);
     }
 
     // const transporter = nodemailer.createTransport({
